@@ -245,16 +245,38 @@
     contact: drawContact,
   };
 
+  // Mobile scroll jank fix: throttle expensive canvas redraws.
+  const MOBILE_FRAME_INTERVAL_MS = isMobile ? 50 : 0; // ~20fps
+  let lastCanvasDrawAt = 0;
+
   function loop(now) {
     let anyActive = false;
+
     sections.forEach((s) => {
       if (!s.active || !s.ctx || prefersReducedMotion) return;
       anyActive = true;
+    });
+
+    if (!anyActive) {
+      rafId = null;
+      return;
+    }
+
+    if (MOBILE_FRAME_INTERVAL_MS) {
+      if (now - lastCanvasDrawAt < MOBILE_FRAME_INTERVAL_MS) {
+        rafId = requestAnimationFrame(loop);
+        return;
+      }
+      lastCanvasDrawAt = now;
+    }
+
+    sections.forEach((s) => {
+      if (!s.active || !s.ctx || prefersReducedMotion) return;
       s.time = now;
       drawers[s.mode](s);
     });
-    if (anyActive) rafId = requestAnimationFrame(loop);
-    else rafId = null;
+
+    rafId = requestAnimationFrame(loop);
   }
 
   function startLoop() {

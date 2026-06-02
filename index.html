@@ -710,6 +710,8 @@ const aboutIO=new IntersectionObserver(entries=>{
 },{threshold:.3});
 aboutIO.observe(aboutEl);
 
+const isMobile = window.matchMedia("(hover: none), (pointer: coarse)").matches || window.innerWidth <= 768;
+
 const cards=[...document.querySelectorAll('.project-card')];
 function updateCards(){
   cards.forEach((card,i)=>{
@@ -717,8 +719,12 @@ function updateCards(){
     if(next)card.classList.toggle('dim',next.getBoundingClientRect().top<window.innerHeight*.55);
   });
 }
-window.addEventListener('scroll',updateCards,{passive:true});
-updateCards();
+
+// Mobile par heavy getBoundingClientRect-on-scroll disable (scroll hang fix).
+if(!isMobile){
+  window.addEventListener('scroll',updateCards,{passive:true});
+  updateCards();
+}
 
 const contactForm=document.getElementById('contactForm');
 const submitBtn=document.getElementById('submitBtn');

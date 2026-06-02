@@ -448,24 +448,24 @@ body.fx-cursor-active .fx-cursor-ring {
   }
 }
 
-/* Mobile-only layout — laptop/desktop (769px+) unchanged */
-@media (max-width: 768px) {
+/* Mobile-only layout — touch devices / small screens only */
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
   .about {
     min-height: auto;
-    padding: clamp(80px, 12vw, 128px) clamp(20px, 4vw, 40px) clamp(40px, 6vw, 64px);
+    padding: clamp(60px, 10vw, 96px) clamp(20px, 4vw, 40px) clamp(24px, 6vw, 44px);
   }
 
   .about-inner .giant-title {
-    margin-bottom: clamp(40px, 8vw, 80px) !important;
+    margin-bottom: clamp(28px, 6vw, 56px) !important;
   }
 
   .about-para {
-    margin-bottom: clamp(48px, 8vw, 80px) !important;
+    margin-bottom: clamp(24px, 6vw, 48px) !important;
     padding-top: 0;
   }
 
   .about .skills-block {
-    margin-bottom: 48px !important;
+    margin-bottom: 32px !important;
   }
 
   .about-actions {
@@ -474,13 +474,13 @@ body.fx-cursor-active .fx-cursor-ring {
   }
 
   .about-deco-col {
-    top: clamp(72px, 10vw, 96px);
+    top: clamp(64px, 9vw, 88px);
     bottom: auto;
-    gap: clamp(20px, 5vh, 40px);
+    gap: clamp(16px, 4vh, 28px);
   }
 
   .projects {
-    padding-bottom: clamp(48px, 8vw, 80px);
+    padding-bottom: clamp(24px, 5vw, 40px);
   }
 
   .projects-stack {
