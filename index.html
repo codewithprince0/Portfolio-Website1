@@ -1,0 +1,739 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0C0C0C">
+<meta name="description" content="Prince Raj — Aspiring Data Analyst. Python, SQL, Excel, Power BI, and data visualization.">
+<title>Prince Raj — Data Analyst Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Kanit',sans-serif;background:#0C0C0C;color:#D7E2EA;
+  min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+img,video{max-width:100%;display:block;-webkit-user-drag:none;user-select:none}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+.hero-heading{
+  background:linear-gradient(180deg,#646973,#bbccd7);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.giant-title{
+  font-weight:900;text-transform:uppercase;letter-spacing:-.02em;line-height:.88;
+  font-size:clamp(3rem,12vw,160px);
+}
+.btn-gradient{
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:9999px;padding:12px 32px;font-size:clamp(.75rem,2vw,.875rem);
+  font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:#fff;white-space:nowrap;
+  background:linear-gradient(123deg,#18011F 7%,#B600A8 37%,#7621B0 72%,#BE4C00 100%);
+  box-shadow:0 4px 4px rgba(181,1,167,.25),inset 4px 4px 12px #7721B1;
+  outline:2px solid #fff;outline-offset:-3px;
+  transition:transform .2s;
+}
+.btn-gradient:hover{transform:scale(1.02)}
+.btn-gradient:active{transform:scale(.98)}
+
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px clamp(20px,4vw,40px);
+}
+.nav-links{display:flex;gap:clamp(16px,3vw,32px)}
+.nav-links a{
+  font-size:clamp(.65rem,1.5vw,.75rem);font-weight:500;text-transform:uppercase;
+  letter-spacing:.2em;color:rgba(255,255,255,.65);transition:color .2s;
+}
+.nav-links a:hover{color:#fff}
+.nav-email{
+  font-size:clamp(.65rem,1.5vw,.75rem);font-weight:500;text-transform:uppercase;
+  letter-spacing:.2em;color:#fff;padding:10px 20px;border-radius:9999px;
+  border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);transition:all .2s;
+}
+.nav-email:hover{background:rgba(255,255,255,.2);transform:scale(1.03)}
+
+.hero{position:relative;height:100vh;min-height:600px;overflow:hidden}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay-1{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.8) 0%,rgba(0,0,0,.35) 50%,rgba(0,0,0,.4) 100%)}
+.hero-overlay-2{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.4) 0%,transparent 40%,rgba(0,0,0,.7) 100%)}
+.hero-content{
+  position:relative;z-index:2;height:100%;display:flex;flex-direction:column;
+  justify-content:space-between;padding:100px clamp(20px,4vw,40px) 28px;
+}
+.hero-text-wrap{flex:1;display:flex;align-items:center}
+.hero-label{
+  font-size:clamp(.625rem,1.2vw,.75rem);font-weight:500;text-transform:uppercase;
+  letter-spacing:.35em;color:rgba(255,255,255,.6);margin-bottom:16px;
+}
+.hero-name{
+  font-weight:900;text-transform:uppercase;line-height:.88;letter-spacing:-.02em;
+  color:#fff;font-size:clamp(3rem,12vw,10.5rem);
+}
+.hero-role{
+  margin-top:20px;font-size:clamp(.625rem,1.5vw,.875rem);font-weight:500;
+  text-transform:uppercase;letter-spacing:.3em;color:rgba(255,255,255,.75);
+}
+.hero-bottom{display:flex;align-items:flex-end;justify-content:space-between}
+.scroll-link{display:flex;flex-direction:column;align-items:center;gap:12px;color:rgba(255,255,255,.7)}
+.scroll-link span{font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.3em}
+.scroll-line{width:1px;height:48px;background:rgba(255,255,255,.35)}
+.sound-wrap{display:flex;align-items:center;gap:12px}
+.sound-label{
+  font-size:clamp(.625rem,1.2vw,.75rem);font-weight:500;text-transform:uppercase;
+  letter-spacing:.25em;color:rgba(255,255,255,.8);animation:pulseFade 2s ease-in-out infinite;
+}
+.sound-btn{
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.1);color:#fff;backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;transition:all .2s;
+}
+.sound-btn:hover{background:rgba(255,255,255,.2);transform:scale(1.1)}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-text span{display:inline;opacity:.18;transition:opacity .15s}
+.reveal-text span.lit{opacity:1}
+
+.about{
+  position:relative;padding:clamp(80px,12vw,128px) clamp(20px,4vw,40px);
+  overflow:hidden;
+}
+.about-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;text-align:center}
+.about-inner .giant-title{margin-bottom:clamp(40px,8vw,80px)}
+.about-para{
+  font-size:clamp(1rem,2vw,1.35rem);font-weight:500;line-height:1.65;
+  color:#D7E2EA;max-width:560px;margin:0 auto clamp(48px,8vw,80px);
+}
+.skills-block{max-width:768px;margin:0 auto 48px;text-align:left}
+.skill-row{
+  display:flex;flex-direction:column;gap:8px;padding:12px 0;
+  border-bottom:1px solid rgba(215,226,234,.08);
+}
+@media(min-width:640px){
+  .skill-row{flex-direction:row;align-items:baseline;gap:24px}
+}
+.skill-label{
+  font-size:clamp(.65rem,1.2vw,.75rem);font-weight:500;text-transform:uppercase;
+  letter-spacing:.2em;color:rgba(215,226,234,.5);min-width:180px;flex-shrink:0;
+}
+.skill-items{
+  display:flex;flex-wrap:wrap;gap:8px 16px;font-size:clamp(.875rem,1.5vw,1rem);
+  font-weight:400;color:#D7E2EA;
+}
+
+.services{background:#fff;color:#0C0C0C;padding:clamp(80px,12vw,128px) clamp(20px,4vw,40px)}
+.services .giant-title{color:#0C0C0C;-webkit-text-fill-color:#0C0C0C;background:none;margin-bottom:clamp(48px,8vw,112px)}
+.service-list{max-width:1024px;margin:0 auto}
+.service-item{
+  display:flex;gap:clamp(24px,5vw,56px);padding:clamp(32px,5vw,48px) 0;
+  border-top:1px solid rgba(12,12,12,.15);
+}
+.service-item:last-child{border-bottom:1px solid rgba(12,12,12,.15)}
+.service-num{
+  font-weight:900;font-size:clamp(2.5rem,8vw,5rem);line-height:1;color:#0C0C0C;flex-shrink:0;
+}
+.service-body h3{
+  font-size:clamp(1rem,2.5vw,1.25rem);font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;margin-bottom:12px;
+}
+.service-body p{
+  font-size:clamp(.875rem,1.8vw,1rem);font-weight:300;line-height:1.65;color:rgba(12,12,12,.72);
+}
+
+.projects{padding:clamp(80px,12vw,128px) clamp(20px,4vw,40px) 50vh}
+.projects-header{text-align:center;margin-bottom:clamp(48px,8vw,80px)}
+.projects-stack{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+.project-card{
+  position:sticky;top:calc(72px + var(--offset,0px));
+  border-radius:clamp(24px,3.5vw,40px);overflow:hidden;
+  background:#141418;border:1px solid rgba(215,226,234,.15);
+  box-shadow:0 25px 50px rgba(0,0,0,.45),0 0 0 1px rgba(215,226,234,.08);
+  transition:transform .3s ease,opacity .3s ease;
+  transform-origin:top center;
+}
+.project-card.dim{transform:scale(.96);opacity:.55}
+.project-head{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  padding:clamp(22px,4vw,36px) clamp(22px,4vw,36px) 18px;gap:16px;
+}
+.project-meta{display:flex;align-items:flex-start;gap:clamp(16px,3vw,32px)}
+.project-num{
+  font-weight:900;font-size:clamp(2.75rem,10vw,6rem);line-height:.85;
+  background:linear-gradient(180deg,#646973,#bbccd7);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.project-cat{
+  font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.25em;
+  color:rgba(215,226,234,.5);margin-bottom:8px;
+}
+.project-name{
+  font-size:clamp(1.2rem,2.8vw,2.1rem);font-weight:800;text-transform:uppercase;
+  letter-spacing:.04em;color:#fff;
+}
+.live-btn{
+  flex-shrink:0;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.15em;
+  color:#D7E2EA;padding:12px 22px;border-radius:9999px;
+  border:1px solid rgba(215,226,234,.25);background:rgba(215,226,234,.03);
+  transition:all .2s;white-space:nowrap;
+}
+.live-btn:hover{border-color:rgba(215,226,234,.5);background:rgba(215,226,234,.08)}
+.project-grid{
+  display:grid;grid-template-columns:1fr 1.1fr;gap:12px;
+  padding:0 clamp(16px,3vw,28px) clamp(16px,3vw,28px);min-height:280px;
+}
+@media(max-width:640px){
+  .project-grid{grid-template-columns:1fr;min-height:auto}
+  .project-shot{min-height:140px}
+  .project-shot.s3{min-height:220px}
+}
+.project-col1{display:grid;grid-template-rows:1fr 1fr;gap:12px}
+@media(max-width:640px){.project-col1{grid-template-rows:auto auto}}
+.project-shot{
+  border-radius:clamp(16px,2vw,24px);overflow:hidden;min-height:120px;
+  border:1px solid rgba(215,226,234,.08);position:relative;
+  background-color:#1a1a22;
+}
+.project-shot.s3{min-height:260px}
+.theme-ipl .project-shot{
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+}
+.theme-ipl .project-shot.s1{background-image:url("./assets/ipl-2.jpg")}
+.theme-ipl .project-shot.s2{background-image:url("./assets/ipl-1.jpg")}
+.theme-ipl .project-shot.s3{background-image:url("./assets/ipl-3.jpg")}
+.theme-ipl .project-shot.s1 .shot-bg{object-position:center 40%}
+.theme-ipl .project-shot.s2 .shot-bg{object-position:center 35%}
+.theme-ipl .project-shot.s3 .shot-bg{object-position:center 45%}
+.project-shot .shot-bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;
+}
+.project-shot .shot-inner{
+  position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:16px;
+  background:linear-gradient(0deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.2) 100%);
+}
+.project-shot .shot-title{font-size:clamp(.75rem,2vw,1.1rem);font-weight:700;line-height:1.2;color:#fff}
+.project-shot .shot-sub{font-size:clamp(11px,1.4vw,13px);color:rgba(255,255,255,.75);margin-top:4px}
+
+.theme-student .project-shot{background-color:#1e3a5f}
+.theme-student .shot-title{color:#93c5fd}
+.theme-estate .project-shot{background-color:#422006}
+.theme-estate .shot-title{color:#fcd34d}
+.theme-ipl .project-shot{background-color:#431407}
+.theme-ipl .shot-title{color:#fdba74}
+.theme-store .project-shot{background-color:#042f2e}
+.theme-store .shot-title{color:#6ee7b7}
+
+.contact{padding:clamp(80px,12vw,128px) clamp(20px,4vw,40px) clamp(48px,8vw,80px)}
+.contact-header{text-align:center;margin-bottom:clamp(48px,8vw,80px)}
+.contact-sub{
+  text-align:center;font-size:clamp(.75rem,1.5vw,.875rem);font-weight:300;
+  text-transform:uppercase;letter-spacing:.15em;color:rgba(215,226,234,.6);
+  margin-top:16px;
+}
+.contact-layout{
+  display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:clamp(32px,5vw,56px);
+  max-width:1100px;margin:clamp(40px,6vw,56px) auto 0;align-items:start;
+}
+@media(max-width:900px){.contact-layout{grid-template-columns:1fr}}
+.contact-grid{display:flex;flex-direction:column;gap:14px}
+.contact-card{
+  display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:14px;
+  border:1px solid rgba(215,226,234,.12);background:rgba(215,226,234,.03);
+  transition:all .25s;
+}
+.contact-card:hover{border-color:rgba(215,226,234,.3);transform:translateX(4px)}
+.contact-icon{
+  width:44px;height:44px;border-radius:12px;flex-shrink:0;
+  background:rgba(215,226,234,.06);border:1px solid rgba(215,226,234,.12);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.contact-label{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:rgba(215,226,234,.5)}
+.contact-value{font-size:14px;font-weight:500;color:#D7E2EA;margin-top:2px;word-break:break-all}
+
+.contact-form-block{
+  padding:clamp(22px,4vw,28px);border-radius:20px;
+  border:1px solid rgba(215,226,234,.15);background:rgba(215,226,234,.03);
+}
+.contact-form-block h3{
+  font-size:clamp(.9rem,2vw,1rem);font-weight:700;text-transform:uppercase;
+  letter-spacing:.12em;margin-bottom:6px;color:#D7E2EA;
+}
+.contact-form-block .form-note{
+  font-size:12px;color:rgba(215,226,234,.5);margin-bottom:20px;line-height:1.5;
+}
+.form-group{margin-bottom:14px}
+.form-group label{
+  display:block;font-size:10px;font-weight:500;text-transform:uppercase;
+  letter-spacing:.15em;color:rgba(215,226,234,.5);margin-bottom:6px;
+}
+.form-group input,.form-group textarea{
+  width:100%;padding:10px 14px;border-radius:10px;font-family:'Kanit',sans-serif;
+  font-size:13px;color:#D7E2EA;background:rgba(255,255,255,.04);
+  border:1px solid rgba(215,226,234,.12);outline:none;transition:border-color .2s;
+}
+.form-group input:focus,.form-group textarea:focus{border-color:rgba(215,226,234,.35)}
+.form-group textarea{resize:vertical;min-height:90px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.form-row{grid-template-columns:1fr}}
+.form-submit{
+  width:100%;margin-top:4px;padding:12px;border-radius:9999px;border:none;
+  font-family:'Kanit',sans-serif;font-size:12px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.1em;color:#fff;cursor:pointer;
+  background:linear-gradient(123deg,#18011F 7%,#B600A8 37%,#7621B0 72%,#BE4C00 100%);
+  box-shadow:0 4px 4px rgba(181,1,167,.25),inset 4px 4px 12px #7721B1;
+  outline:2px solid #fff;outline-offset:-3px;transition:transform .2s;
+}
+.form-submit:hover{transform:scale(1.02)}
+.form-submit:disabled{opacity:.7;cursor:not-allowed}
+.form-success{
+  display:none;text-align:center;padding:12px;border-radius:10px;margin-top:12px;
+  background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:#6ee7b7;font-size:13px;
+}
+.form-success.show{display:block}
+
+footer{
+  padding:32px clamp(20px,4vw,40px);border-top:1px solid rgba(215,226,234,.08);
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;
+  font-size:clamp(.7rem,1.2vw,.875rem);color:rgba(215,226,234,.5);
+}
+footer span:last-child{font-weight:300;text-transform:uppercase;letter-spacing:.12em}
+
+@keyframes pulseFade{0%,100%{opacity:.8}50%{opacity:.4}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.hero-anim{animation:fadeUp .9s ease both}
+.hero-anim.d1{animation-delay:.15s}.hero-anim.d2{animation-delay:.35s}
+.hero-anim.d3{animation-delay:.55s}.hero-anim.d4{animation-delay:.75s}
+
+::-webkit-scrollbar{width:10px;background:#0C0C0C}
+::-webkit-scrollbar-thumb{background:#1f1f24;border-radius:6px}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .about-deco-col--left .about-deco:last-child{display:none}
+}
+</style>
+<link rel="stylesheet" href="effects.css">
+</head>
+<body>
+
+<canvas id="fxTrail" aria-hidden="true"></canvas>
+<div id="fxRipples" aria-hidden="true"></div>
+<div class="fx-cursor-dot" aria-hidden="true"></div>
+<div class="fx-cursor-ring" aria-hidden="true"></div>
+
+<nav class="nav">
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="mailto:princeraj9696st@gmail.com" class="nav-email">Email me</a>
+</nav>
+
+<section class="hero" id="home">
+  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
+    <source src="assets/intro.mp4" type="video/mp4">
+    <source src="https://harsh-portfolio-coral.vercel.app/intro.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay-1"></div>
+  <div class="hero-overlay-2"></div>
+  <div class="hero-content">
+    <div class="hero-text-wrap">
+      <div>
+        <p class="hero-label hero-anim d1">Portfolio · 2026</p>
+        <h1 class="hero-name hero-anim d2">Prince<br>Raj</h1>
+        <p class="hero-role hero-anim d3">Aspiring Data Analyst · BCA Student · Python &amp; SQL</p>
+      </div>
+    </div>
+    <div class="hero-bottom">
+      <a href="#about" class="scroll-link hero-anim d4" aria-label="Scroll to about">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </a>
+      <div class="sound-wrap hero-anim d4">
+        <span class="sound-label" id="soundLabel">Tap for sound</span>
+        <button class="sound-btn" id="soundBtn" aria-label="Play introduction">
+          <svg id="soundIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="section-fx section-fx--about" aria-hidden="true">
+    <canvas class="section-fx-canvas" data-fx="about"></canvas>
+    <div class="section-fx-glass"></div>
+  </div>
+  <div class="about-deco-col about-deco-col--left" aria-hidden="true">
+    <img class="about-deco" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png" alt="" loading="lazy">
+    <img class="about-deco" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png" alt="" loading="lazy">
+  </div>
+  <div class="about-deco-col about-deco-col--right" aria-hidden="true">
+    <img class="about-deco" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png" alt="" loading="lazy">
+    <img class="about-deco" src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png" alt="" loading="lazy">
+  </div>
+  <div class="about-inner">
+    <h2 class="giant-title hero-heading reveal">About me</h2>
+    <p class="about-para reveal-text reveal" id="aboutText">I'm a passionate BCA student and aspiring Data Analyst who transforms raw data into decisions that matter. I craft Python scripts, SQL queries, Excel models, and Power BI dashboards — turning numbers into clear insights for real-world problems. Let's build something meaningful together!</p>
+    <div class="skills-block reveal">
+      <div class="skill-row"><div class="skill-label">Languages</div><div class="skill-items">Python · SQL · C · C++ · HTML · CSS</div></div>
+      <div class="skill-row"><div class="skill-label">Libraries</div><div class="skill-items">Pandas · NumPy · Matplotlib · Seaborn · Plotly</div></div>
+      <div class="skill-row"><div class="skill-label">Tools &amp; Platforms</div><div class="skill-items">Excel · Power BI · Git · GitHub · Jupyter · VS Code</div></div>
+      <div class="skill-row"><div class="skill-label">Analysis</div><div class="skill-items">Statistics · Data Cleaning · ETL · ML Basics · Data Viz</div></div>
+    </div>
+    <div class="about-actions reveal">
+      <a href="#contact" class="btn-gradient">Contact Me</a>
+      <a href="assets/resume.pdf" class="btn-outline" download="Prince-Raj-Resume.pdf">Download CV</a>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="section-fx section-fx--services" aria-hidden="true">
+    <canvas class="section-fx-canvas" data-fx="services"></canvas>
+    <div class="section-fx-hex"></div>
+    <div class="section-fx-pulse"></div>
+    <div class="section-fx-glass"></div>
+  </div>
+  <h2 class="giant-title reveal">Services</h2>
+  <div class="service-list">
+    <div class="service-item reveal">
+      <div class="service-num">01</div>
+      <div class="service-body">
+        <h3>Data Analysis &amp; Excel Reporting</h3>
+        <p>Comprehensive analysis using Excel — pivot tables, charts, and performance patterns that uncover trends and drive smarter decisions.</p>
+      </div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">02</div>
+      <div class="service-body">
+        <h3>Python &amp; Pandas Automation</h3>
+        <p>Building Python pipelines with Pandas and NumPy to clean, transform, and analyse datasets at scale.</p>
+      </div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">03</div>
+      <div class="service-body">
+        <h3>SQL &amp; Database Analytics</h3>
+        <p>Writing efficient SQL queries to extract, join, and aggregate data into structured insights ready for reporting.</p>
+      </div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">04</div>
+      <div class="service-body">
+        <h3>Power BI Dashboards</h3>
+        <p>Designing interactive Power BI dashboards with clear KPIs so stakeholders can explore data and act on insights.</p>
+      </div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-num">05</div>
+      <div class="service-body">
+        <h3>Data Visualization &amp; Insights</h3>
+        <p>Creating compelling charts with Matplotlib, Seaborn, and Plotly — turning complex datasets into clear stories.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="section-fx section-fx--projects" aria-hidden="true">
+    <canvas class="section-fx-canvas" data-fx="projects"></canvas>
+    <div class="section-fx-radar"></div>
+    <div class="section-fx-shimmer"></div>
+    <div class="section-fx-glass"></div>
+  </div>
+  <div class="projects-header">
+    <h2 class="giant-title hero-heading reveal">Project</h2>
+  </div>
+  <div class="projects-stack" id="projectsStack">
+
+    <article class="project-card theme-student reveal" style="--offset:0px" data-index="0">
+      <div class="project-head">
+        <div class="project-meta">
+          <div class="project-num">01</div>
+          <div>
+            <div class="project-cat">Personal · Excel</div>
+            <div class="project-name">Student Results</div>
+          </div>
+        </div>
+        <a href="https://github.com/codewithprince0" target="_blank" rel="noopener" class="live-btn">View on GitHub</a>
+      </div>
+      <div class="project-grid">
+        <div class="project-col1">
+          <div class="project-shot s1">
+            <img class="shot-bg" src="https://images.pexels.com/photos/289737/pexels-photo-289737.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Classroom" loading="lazy">
+            <div class="shot-inner"><div class="shot-title">Grade Distribution</div><div class="shot-sub">Excel · Pivot Tables</div></div>
+          </div>
+          <div class="project-shot s2">
+            <img class="shot-bg" src="https://images.pexels.com/photos/301926/pexels-photo-301926.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Students studying" loading="lazy">
+            <div class="shot-inner"><div class="shot-title">Performance Trends</div><div class="shot-sub">Charts &amp; Analysis</div></div>
+          </div>
+        </div>
+        <div class="project-shot s3">
+          <img class="shot-bg" src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Graduation students" loading="lazy">
+          <div class="shot-inner"><div class="shot-title">Student Result Analysis</div><div class="shot-sub">Academic performance insights</div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card theme-estate reveal" style="--offset:24px" data-index="1">
+      <div class="project-head">
+        <div class="project-meta">
+          <div class="project-num">02</div>
+          <div>
+            <div class="project-cat">Personal · Python</div>
+            <div class="project-name">Gurgaon Real Estate</div>
+          </div>
+        </div>
+        <a href="https://github.com/codewithprince0/Gurgaon-Real-Estate-Market-Analysis-Project" target="_blank" rel="noopener" class="live-btn">View on GitHub</a>
+      </div>
+      <div class="project-grid">
+        <div class="project-col1">
+          <div class="project-shot s1">
+            <img class="shot-bg" src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800" alt="City buildings" loading="lazy">
+            <div class="shot-inner"><div class="shot-title">Price Trends</div><div class="shot-sub">Gurugram Market</div></div>
+          </div>
+          <div class="project-shot s2">
+            <img class="shot-bg" src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Modern building" loading="lazy">
+            <div class="shot-inner"><div class="shot-title">Location Patterns</div><div class="shot-sub">Pandas · Matplotlib</div></div>
+          </div>
+        </div>
+        <div class="project-shot s3">
+          <img class="shot-bg" src="https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Real estate skyline" loading="lazy">
+          <div class="shot-inner"><div class="shot-title">Real Estate Analysis</div><div class="shot-sub">Property &amp; investment insights</div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card theme-ipl reveal" style="--offset:48px" data-index="2">
+      <div class="project-head">
+        <div class="project-meta">
+          <div class="project-num">03</div>
+          <div>
+            <div class="project-cat">Personal · Analytics</div>
+            <div class="project-name">IPL 2008–2025</div>
+          </div>
+        </div>
+        <a href="https://github.com/codewithprince0/IPL-Datasets-for-session-2008-2025-Analysis-Advanced-project" target="_blank" rel="noopener" class="live-btn">View on GitHub</a>
+      </div>
+      <div class="project-grid">
+        <div class="project-col1">
+          <div class="project-shot s1">
+            <img class="shot-bg" src="./assets/ipl-2.jpg" alt="Cricket team on field" loading="eager" decoding="async">
+            <div class="shot-inner"><div class="shot-title">Player Stats</div><div class="shot-sub">17 IPL Seasons</div></div>
+          </div>
+          <div class="project-shot s2">
+            <img class="shot-bg" src="./assets/ipl-1.jpg" alt="IPL cricket stadium at night" loading="eager" decoding="async">
+            <div class="shot-inner"><div class="shot-title">Match Analytics</div><div class="shot-sub">Python · NumPy</div></div>
+          </div>
+        </div>
+        <div class="project-shot s3">
+          <img class="shot-bg" src="./assets/ipl-3.jpg" alt="Cricket ground at sunset" loading="eager" decoding="async">
+          <div class="shot-inner"><div class="shot-title">IPL Dataset Analysis</div><div class="shot-sub">Deliveries &amp; matches report</div></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card theme-store reveal" style="--offset:72px" data-index="3">
+      <div class="project-head">
+        <div class="project-meta">
+          <div class="project-num">04</div>
+          <div>
+            <div class="project-cat">Personal · Python</div>
+            <div class="project-name">SuperStore Orders</div>
+          </div>
+        </div>
+        <a href="https://github.com/codewithprince0/SuperStore_Orders-Analysis-Report" target="_blank" rel="noopener" class="live-btn">View on GitHub</a>
+      </div>
+      <div class="project-grid">
+        <div class="project-col1">
+          <div class="project-shot s1">
+            <img class="shot-bg" src="https://images.pexels.com/photos/5632402/pexels-photo-5632402.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Retail store" loading="lazy">
+            <div class="shot-inner"><div class="shot-title">Revenue Patterns</div><div class="shot-sub">Sales Analytics</div></div>
+          </div>
+          <div class="project-shot s2">
+            <img class="shot-bg" src="https://images.pexels.com/photos/669366/pexels-photo-669366.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Data dashboard" loading="lazy">
+            <div class="shot-inner"><div class="shot-title">Order Trends</div><div class="shot-sub">Regional Performance</div></div>
+          </div>
+        </div>
+        <div class="project-shot s3">
+          <img class="shot-bg" src="https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Supermarket" loading="lazy">
+          <div class="shot-inner"><div class="shot-title">SuperStore Orders Report</div><div class="shot-sub">Retail order data insights</div></div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section-fx section-fx--contact" aria-hidden="true">
+    <canvas class="section-fx-canvas" data-fx="contact"></canvas>
+    <div class="section-fx-aurora section-fx-aurora--1"></div>
+    <div class="section-fx-aurora section-fx-aurora--2"></div>
+    <div class="section-fx-glass"></div>
+  </div>
+  <div class="contact-header">
+    <h2 class="giant-title hero-heading reveal">Get in touch</h2>
+    <p class="contact-sub reveal">Pick whichever channel suits you</p>
+  </div>
+
+  <div class="contact-layout reveal">
+    <div class="contact-form-block">
+      <h3>Send a Message</h3>
+      <p class="form-note">Fill in your details and I'll get back to you soon.</p>
+      <form id="contactForm" action="https://formsubmit.co/princeraj9696st@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New message from Prince Raj Portfolio">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" id="formNext" value="">
+        <input type="text" name="_honey" style="display:none">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="e.g. Prince Raj" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="princeraj9696st@gmail.com" required>
+          </div>
+          <div class="form-group">
+            <label for="mobile">Mobile</label>
+            <input type="tel" id="mobile" name="mobile" placeholder="+91 9693874572" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="Job / Collaboration / Hello" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">Send Message</button>
+        <div class="form-success" id="formSuccess">Message sent! I'll reply soon.</div>
+      </form>
+    </div>
+
+    <div class="contact-grid">
+      <a href="mailto:princeraj9696st@gmail.com" class="contact-card">
+        <div class="contact-icon">✉</div>
+        <div><div class="contact-label">Email</div><div class="contact-value">princeraj9696st@gmail.com</div></div>
+      </a>
+      <a href="tel:+919693874572" class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div><div class="contact-label">Phone</div><div class="contact-value">+91 9693874572</div></div>
+      </a>
+      <a href="http://www.linkedin.com/in/princekumar9693pr" target="_blank" rel="noopener" class="contact-card">
+        <div class="contact-icon">in</div>
+        <div><div class="contact-label">LinkedIn</div><div class="contact-value">princekumar9693pr</div></div>
+      </a>
+      <a href="https://github.com/codewithprince0" target="_blank" rel="noopener" class="contact-card">
+        <div class="contact-icon">⌘</div>
+        <div><div class="contact-label">GitHub</div><div class="contact-value">@codewithprince0</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Prince Raj — CodeWithPrince</span>
+  <span>Designed &amp; built in India</span>
+</footer>
+
+<audio id="introAudio" preload="auto">
+  <source src="assets/intro-audio.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const video=document.getElementById('heroVideo');
+video.muted=true;video.volume=0;
+
+const introAudio=document.getElementById('introAudio');
+const soundBtn=document.getElementById('soundBtn');
+const soundIcon=document.getElementById('soundIcon');
+const soundLabel=document.getElementById('soundLabel');
+let isSpeaking=false;
+const iconMuted=`<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>`;
+const iconUnmuted=`<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>`;
+
+function setSpeaking(on){
+  isSpeaking=on;
+  soundIcon.innerHTML=on?iconUnmuted:iconMuted;
+  soundLabel.textContent=on?'Speaking…':'Tap for sound';
+}
+
+function stopIntro(){
+  introAudio.pause();
+  introAudio.currentTime=0;
+  setSpeaking(false);
+}
+
+function speakIntro(){
+  stopIntro();
+  introAudio.play().then(()=>setSpeaking(true)).catch(()=>{});
+}
+
+introAudio.addEventListener('ended',stopIntro);
+soundBtn.addEventListener('click',()=>{if(isSpeaking)stopIntro();else speakIntro();});
+window.addEventListener('beforeunload',stopIntro);
+
+const revealIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealIO.observe(el));
+
+const aboutEl=document.getElementById('aboutText');
+const aboutText=aboutEl.textContent;
+aboutEl.textContent='';
+aboutEl.classList.add('reveal-text');
+aboutText.split('').forEach(ch=>{
+  const s=document.createElement('span');
+  s.textContent=ch;
+  aboutEl.appendChild(s);
+});
+const aboutIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    aboutEl.querySelectorAll('span').forEach((sp,i)=>setTimeout(()=>sp.classList.add('lit'),i*8));
+    aboutIO.disconnect();
+  });
+},{threshold:.3});
+aboutIO.observe(aboutEl);
+
+const cards=[...document.querySelectorAll('.project-card')];
+function updateCards(){
+  cards.forEach((card,i)=>{
+    const next=cards[i+1];
+    if(next)card.classList.toggle('dim',next.getBoundingClientRect().top<window.innerHeight*.55);
+  });
+}
+window.addEventListener('scroll',updateCards,{passive:true});
+updateCards();
+
+const contactForm=document.getElementById('contactForm');
+const submitBtn=document.getElementById('submitBtn');
+const formSuccess=document.getElementById('formSuccess');
+document.getElementById('formNext').value=location.href.split('?')[0].split('#')[0]+'?sent=true#contact';
+if(new URLSearchParams(location.search).get('sent')==='true'){
+  formSuccess.classList.add('show');
+  contactForm.reset();
+  history.replaceState({},'',location.pathname+location.hash);
+}
+contactForm.addEventListener('submit',()=>{
+  submitBtn.disabled=true;
+  submitBtn.textContent='Sending…';
+});
+</script>
+<script src="effects.js" defer></script>
+</body>
+</html>

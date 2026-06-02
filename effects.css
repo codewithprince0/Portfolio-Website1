@@ -1,0 +1,449 @@
+/* Section backgrounds + magical cursor + About layout tweaks */
+
+:root {
+  --fx-magenta: #b600a8;
+  --fx-purple: #7621b0;
+  --fx-glow: rgba(182, 0, 168, 0.45);
+  --fx-glow-soft: rgba(118, 33, 176, 0.25);
+}
+
+/* ── Magical cursor (desktop) ── */
+#fxTrail {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+#fxRipples {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9996;
+}
+
+body.fx-cursor-active {
+  cursor: none;
+}
+
+body.fx-cursor-active a,
+body.fx-cursor-active button,
+body.fx-cursor-active input,
+body.fx-cursor-active textarea,
+body.fx-cursor-active label {
+  cursor: none;
+}
+
+.fx-cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 12px var(--fx-glow), 0 0 24px var(--fx-glow-soft);
+  z-index: 10002;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.fx-cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 50%;
+  border: 1px solid rgba(182, 0, 168, 0.55);
+  box-shadow: 0 0 20px rgba(118, 33, 176, 0.35), inset 0 0 12px rgba(182, 0, 168, 0.15);
+  z-index: 10001;
+  pointer-events: none;
+  opacity: 0;
+  transition: width 0.25s ease, height 0.25s ease, margin 0.25s ease, opacity 0.3s;
+}
+
+body.fx-cursor-active .fx-cursor-dot,
+body.fx-cursor-active .fx-cursor-ring {
+  opacity: 1;
+}
+
+.fx-cursor-ring.fx-hover {
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  border-color: rgba(187, 204, 215, 0.7);
+  box-shadow: 0 0 28px rgba(182, 0, 168, 0.5), 0 0 40px rgba(118, 33, 176, 0.25);
+}
+
+.fx-cursor-ring.fx-click {
+  transform: scale(0.85);
+}
+
+.fx-ripple {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9997;
+  border: 1px solid rgba(182, 0, 168, 0.4);
+  box-shadow: 0 0 20px rgba(118, 33, 176, 0.2);
+  transform: translate(-50%, -50%) scale(0);
+  animation: fxRippleExpand 0.9s ease-out forwards;
+}
+
+@keyframes fxRippleExpand {
+  to {
+    transform: translate(-50%, -50%) scale(2.5);
+    opacity: 0;
+  }
+}
+
+/* ── Section FX ── */
+.section-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.section-fx-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.section-fx-glass {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 75% 55% at var(--fx-glow-x, 50%) var(--fx-glow-y, 40%),
+    rgba(118, 33, 176, 0.08) 0%,
+    transparent 58%
+  );
+  transition: opacity 0.35s ease;
+}
+
+.about,
+.services,
+.projects,
+.contact {
+  position: relative;
+  overflow: hidden;
+  --fx-scroll-y: 0px;
+}
+
+.about .section-fx,
+.projects .section-fx,
+.contact .section-fx {
+  transform: translate3d(0, var(--fx-scroll-y), 0);
+  will-change: transform;
+}
+
+.about .about-inner,
+.about-deco-col,
+.services > :not(.section-fx),
+.projects > :not(.section-fx),
+.contact > :not(.section-fx) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── About: more space + deco columns (2 left, 2 right) ── */
+.about {
+  padding: clamp(120px, 18vw, 200px) clamp(20px, 4vw, 40px) clamp(140px, 20vw, 220px);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.about-inner .giant-title {
+  margin-bottom: clamp(56px, 10vw, 100px) !important;
+}
+
+.about-para {
+  margin-bottom: clamp(64px, 12vw, 110px) !important;
+  padding-top: clamp(8px, 2vw, 16px);
+}
+
+.about .skills-block {
+  margin-bottom: clamp(64px, 10vw, 96px) !important;
+}
+
+.about-actions {
+  margin-top: clamp(16px, 3vw, 32px);
+  padding-top: clamp(8px, 2vw, 20px);
+}
+
+.about-deco-col {
+  position: absolute;
+  top: clamp(100px, 14vw, 160px);
+  bottom: clamp(80px, 12vw, 140px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(40px, 8vh, 120px);
+  pointer-events: none;
+  z-index: 2;
+  width: clamp(55px, 14vw, 210px);
+}
+
+.about-deco-col--left {
+  left: clamp(4px, 2vw, 28px);
+}
+
+.about-deco-col--right {
+  right: clamp(4px, 2vw, 28px);
+}
+
+.about-deco-col .about-deco {
+  position: relative;
+  width: 100%;
+  max-width: clamp(50px, 12vw, 200px);
+  height: auto;
+  opacity: 0.9;
+  animation: fxDecoFloat 9s ease-in-out infinite;
+}
+
+.about-deco-col--right .about-deco:nth-child(2) {
+  animation-delay: -4s;
+}
+
+.about-deco-col--left .about-deco:nth-child(2) {
+  animation-delay: -2s;
+}
+
+@keyframes fxDecoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.about-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding: 12px 32px;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #d7e2ea;
+  white-space: nowrap;
+  border: 1px solid rgba(215, 226, 234, 0.35);
+  background: rgba(215, 226, 234, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 0 24px rgba(118, 33, 176, 0.12);
+  transition: transform 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.btn-outline:hover {
+  transform: scale(1.02);
+  border-color: rgba(215, 226, 234, 0.55);
+  background: rgba(215, 226, 234, 0.1);
+  box-shadow: 0 0 32px rgba(182, 0, 168, 0.2);
+}
+
+.btn-outline:active {
+  transform: scale(0.98);
+}
+
+.section-fx--about .section-fx-glass {
+  background: radial-gradient(
+    ellipse 65% 45% at var(--fx-glow-x, 50%) var(--fx-glow-y, 35%),
+    rgba(182, 0, 168, 0.09) 0%,
+    rgba(118, 33, 176, 0.04) 45%,
+    transparent 72%
+  );
+}
+
+/* Services — hex + pulse rings */
+.section-fx--services .section-fx-hex {
+  position: absolute;
+  inset: -30%;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 0 L56 16 v32 L28 64 L0 48 V16 Z' fill='none' stroke='%237621b0' stroke-width='0.6'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+  animation: fxHexSlide 35s linear infinite;
+}
+
+.section-fx--services .section-fx-pulse {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(90vw, 700px);
+  height: min(90vw, 700px);
+  margin: -50% 0 0 -50%;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 180, 216, 0.15);
+  box-shadow: 0 0 0 0 rgba(118, 33, 176, 0.2);
+  animation: fxPulseRing 4s ease-out infinite;
+}
+
+.section-fx--services .section-fx-pulse::before {
+  content: "";
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  border: 1px solid rgba(182, 0, 168, 0.12);
+  animation: fxPulseRing 4s ease-out infinite 1.2s;
+}
+
+@keyframes fxHexSlide {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(28px, 50px); }
+}
+
+@keyframes fxPulseRing {
+  0% { transform: scale(0.85); opacity: 0.5; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+/* Projects — radar + shimmer */
+.section-fx--projects .section-fx-radar {
+  position: absolute;
+  width: min(120vmin, 900px);
+  height: min(120vmin, 900px);
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(187, 204, 215, 0.06);
+  background: repeating-radial-gradient(
+    circle at center,
+    transparent 0,
+    transparent 38px,
+    rgba(187, 204, 215, 0.03) 39px,
+    transparent 40px
+  );
+  overflow: hidden;
+}
+
+.section-fx--projects .section-fx-radar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    rgba(182, 0, 168, 0.12) 40deg,
+    transparent 80deg
+  );
+  animation: fxRadarSpin 6s linear infinite;
+}
+
+.section-fx--projects .section-fx-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    transparent 40%,
+    rgba(187, 204, 215, 0.04) 50%,
+    transparent 60%
+  );
+  background-size: 200% 200%;
+  animation: fxShimmer 8s ease-in-out infinite;
+}
+
+@keyframes fxRadarSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fxShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Contact — aurora ribbons */
+.section-fx-aurora {
+  position: absolute;
+  width: 120%;
+  height: 35%;
+  left: -10%;
+  filter: blur(55px);
+  opacity: 0.4;
+  mix-blend-mode: screen;
+}
+
+.section-fx-aurora--1 {
+  top: 8%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(118, 33, 176, 0.4),
+    rgba(182, 0, 168, 0.25),
+    transparent
+  );
+  animation: fxAuroraWave 16s ease-in-out infinite alternate;
+}
+
+.section-fx-aurora--2 {
+  bottom: 5%;
+  background: linear-gradient(
+    80deg,
+    transparent,
+    rgba(190, 76, 0, 0.2),
+    rgba(118, 33, 176, 0.3),
+    transparent
+  );
+  animation: fxAuroraWave 20s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes fxAuroraWave {
+  0% { transform: translateX(-4%) skewY(-2deg); }
+  100% { transform: translateX(6%) skewY(2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-fx--services .section-fx-hex,
+  .section-fx--services .section-fx-pulse,
+  .section-fx--projects .section-fx-radar::after,
+  .section-fx--projects .section-fx-shimmer,
+  .section-fx-aurora,
+  .about-deco-col .about-deco {
+    animation: none !important;
+  }
+
+  .about .section-fx,
+  .projects .section-fx,
+  .contact .section-fx {
+    transform: none !important;
+  }
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
+  body.fx-cursor-active,
+  body.fx-cursor-active a,
+  body.fx-cursor-active button,
+  body.fx-cursor-active input,
+  body.fx-cursor-active textarea {
+    cursor: auto;
+  }
+
+  .fx-cursor-dot,
+  .fx-cursor-ring,
+  #fxTrail {
+    display: none !important;
+  }
+
+  .about-deco-col {
+    width: clamp(45px, 12vw, 100px);
+    opacity: 0.75;
+  }
+}
