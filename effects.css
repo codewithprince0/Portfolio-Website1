@@ -447,3 +447,53 @@ body.fx-cursor-active .fx-cursor-ring {
     opacity: 0.75;
   }
 }
+
+/* Mobile-only layout — laptop/desktop (769px+) unchanged */
+@media (max-width: 768px) {
+  .about {
+    min-height: auto;
+    padding: clamp(80px, 12vw, 128px) clamp(20px, 4vw, 40px) clamp(40px, 6vw, 64px);
+  }
+
+  .about-inner .giant-title {
+    margin-bottom: clamp(40px, 8vw, 80px) !important;
+  }
+
+  .about-para {
+    margin-bottom: clamp(48px, 8vw, 80px) !important;
+    padding-top: 0;
+  }
+
+  .about .skills-block {
+    margin-bottom: 48px !important;
+  }
+
+  .about-actions {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .about-deco-col {
+    top: clamp(72px, 10vw, 96px);
+    bottom: auto;
+    gap: clamp(20px, 5vh, 40px);
+  }
+
+  .projects {
+    padding-bottom: clamp(48px, 8vw, 80px);
+  }
+
+  .projects-stack {
+    gap: 20px;
+  }
+
+  .project-card {
+    position: relative;
+    top: auto;
+  }
+
+  .project-card.dim {
+    transform: none;
+    opacity: 1;
+  }
+}
